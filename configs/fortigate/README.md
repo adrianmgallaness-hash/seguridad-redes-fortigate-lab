@@ -1,16 +1,22 @@
-# FortiGate
+# FortiGate Running Config
 
-En esta carpeta se almacenará el **running-config exportado del FortiGate**.
+Esta carpeta contiene la configuración exportada del FortiGate utilizada en el laboratorio.
 
-La configuración del laboratorio se realizó mediante GUI. El archivo de configuración se agregará aquí después de realizar el export/backup final.
+## Archivo
 
-Configuraciones relevantes:
+- `fortigate-running-config-sanitized.conf`: copia del running-config preparada para el repositorio público.
 
-- Interfaces y VLANs 10, 20 y 30.
+La copia publicada conserva la configuración necesaria para documentar el laboratorio, incluyendo interfaces/VLANs, DHCP, políticas de firewall, NAT, IPS, la firma personalizada de SQL Injection, File Filter y DoS Policy.
+
+## Seguridad
+
+El backup original exportado desde FortiGate contiene material sensible generado por el sistema, como contraseñas cifradas y claves privadas. Por este motivo, el archivo publicado fue sanitizado antes de subirlo a GitHub. El backup original debe conservarse localmente y no publicarse en un repositorio público.
+
+Configuraciones relevantes presentes en el archivo:
+
+- VLAN 10 USERS, VLAN 20 WEB y VLAN 30 DB.
 - DHCP en VLAN10-USERS.
-- Default route.
-- NAT.
-- Firewall policies.
+- Políticas `USERS-to-WEB-HTTPS`, `USERS-to-DB-BLOCK-3306`, `WEB-to-DB-MYSQL` y `USERS-to-INTERNET`.
 - IPS `SQLI-PROTECT`.
 - Firma personalizada `LAB.SQLI.TEST`.
 - File Filter `BLOCK-EXE`.
