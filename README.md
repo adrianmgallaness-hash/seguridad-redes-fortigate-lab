@@ -2,7 +2,7 @@
 
 ## 🎥 Video demostrativo
 
-> **Enlace del video:** Pendiente de publicar en YouTube o OneDrive institucional.
+> **Enlace del video:** https://youtu.be/tVhtWXWO9dE
 
 ---
 
