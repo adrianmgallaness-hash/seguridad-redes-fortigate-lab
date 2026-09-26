@@ -1,0 +1,113 @@
+===== HOSTNAME =====
+web-server
+
+===== IP ADDRESS =====
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd ff:ff:ff:ff:ff:ff
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host noprefixroute
+       valid_lft forever preferred_lft forever
+2: ens3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 0c:25:16:13:00:00 brd ff:ff:ff:ff:ff:ff
+    altname enp0s3
+    inet 10.21.39.130/28 brd 10.21.39.143 scope global ens3
+       valid_lft forever preferred_lft forever
+    inet6 fe80::e25:16ff:fe13:0/64 scope link
+       valid_lft forever preferred_lft forever
+3: ens4: <BROADCAST,MULTICAST> mtu 1500 qdisc noop state DOWN group default qlen 1000
+    link/ether 0c:25:16:13:00:01 brd ff:ff:ff:ff:ff:ff
+    altname enp0s4
+
+===== ROUTING TABLE =====
+default via 10.21.39.129 dev ens3 proto static
+10.21.39.128/28 dev ens3 proto kernel scope link src 10.21.39.130
+
+===== LISTENING PORTS =====
+State  Recv-Q Send-Q Local Address:Port Peer Address:Port Process
+LISTEN 0      4096      127.0.0.54:53       0.0.0.0:*    systemd-resolved
+LISTEN 0      4096   127.0.0.53%lo:53       0.0.0.0:*    systemd-resolved
+LISTEN 0      511          0.0.0.0:443      0.0.0.0:*    nginx
+LISTEN 0      4096         0.0.0.0:22       0.0.0.0:*    sshd/systemd
+LISTEN 0      511          0.0.0.0:80       0.0.0.0:*    nginx
+LISTEN 0      4096            [::]:22          [::]:*    sshd/systemd
+LISTEN 0      511             [::]:80          [::]:*    nginx
+
+===== NGINX STATUS =====
+nginx.service - A high performance web server and a reverse proxy server
+Loaded: loaded (/usr/lib/systemd/system/nginx.service; enabled)
+Active: active (running)
+
+===== NGINX CONFIGURATION =====
+# /etc/nginx/nginx.conf
+user www-data;
+worker_processes auto;
+pid /run/nginx.pid;
+error_log /var/log/nginx/error.log;
+include /etc/nginx/modules-enabled/*.conf;
+
+events {
+    worker_connections 768;
+}
+
+http {
+    sendfile on;
+    tcp_nopush on;
+    types_hash_max_size 2048;
+
+    include /etc/nginx/mime.types;
+    default_type application/octet-stream;
+
+    ssl_protocols TLSv1 TLSv1.1 TLSv1.2 TLSv1.3;
+    ssl_prefer_server_ciphers on;
+
+    access_log /var/log/nginx/access.log;
+    gzip on;
+
+    include /etc/nginx/conf.d/*.conf;
+    include /etc/nginx/sites-enabled/*;
+}
+
+# Relevant MIME type for executable files
+application/octet-stream  bin exe dll;
+
+# /etc/nginx/sites-enabled/default
+server {
+    listen 443 ssl;
+    server_name 10.21.39.130;
+
+    ssl_certificate /etc/nginx/ssl/cert.pem;
+    ssl_certificate_key /etc/nginx/ssl/key.pem;
+
+    root /var/www/html;
+    index index.php index.html;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+
+    location ~ \.php$ {
+        include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/run/php/php8.3-fpm.sock;
+    }
+}
+
+# /etc/nginx/sites-enabled/sqli-lab
+server {
+    listen 80;
+    listen [::]:80;
+
+    server_name _;
+    root /var/www/html;
+
+    location /sqli-test {
+        default_type text/plain;
+        return 200 "SQLi LAB - Web Server funcionando\n";
+    }
+
+    location / {
+        try_files $uri =404;
+    }
+}
+
+# Source: captured from the running WEB server during the FortiGate lab.
