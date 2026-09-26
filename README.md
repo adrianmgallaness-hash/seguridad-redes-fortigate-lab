@@ -45,12 +45,12 @@ Implementar y validar una arquitectura de red segmentada mediante VLANs y proteg
 
 La documentación y las capturas de las pruebas se almacenan en:
 
-- `docs/` — explicación técnica del laboratorio.
-- `images/` — capturas utilizadas en la documentación.
-- `diagrams/` — diagramas de topología.
-- `configs/` — running-configs y configuraciones relevantes.
-- `scripts/` — scripts y comandos utilizados.
-- `evidence/` — evidencias de validación de los controles.
+- [`laboratorio/docs/`](laboratorio/docs/) — explicación técnica del laboratorio.
+- [`laboratorio/images/`](laboratorio/images/) — capturas utilizadas en la documentación.
+- [`laboratorio/diagrams/`](laboratorio/diagrams/) — diagramas de topología.
+- [`laboratorio/configs/`](laboratorio/configs/) — running-configs y configuraciones relevantes.
+- [`laboratorio/scripts/`](laboratorio/scripts/) — scripts y comandos utilizados.
+- [`laboratorio/evidence/`](laboratorio/evidence/) — evidencias de validación de los controles.
 
 ## Pruebas realizadas
 
@@ -70,16 +70,18 @@ Entre las pruebas realizadas se encuentran:
 ```text
 .
 ├── README.md
-├── docs/
-├── images/
-├── diagrams/
-├── configs/
-│   ├── fortigate/
-│   └── servers/
-├── scripts/
-│   ├── web/
-│   └── tests/
-└── evidence/
+├── VIDEO.md
+└── laboratorio/
+    ├── configs/
+    │   ├── fortigate/
+    │   └── servers/
+    ├── diagrams/
+    ├── docs/
+    ├── evidence/
+    ├── images/
+    └── scripts/
+        ├── tests/
+        └── web/
 ```
 
 ## Nota sobre la demostración SQLi
@@ -88,4 +90,4 @@ La detección SQLi se validó en un endpoint HTTP controlado dentro del laborato
 
 ## Estado
 
-Laboratorio técnico completado. Pendiente incorporar el enlace final del video, las capturas seleccionadas, el diagrama final y el running-config exportado del FortiGate.
+Laboratorio técnico completado. La documentación, las evidencias, los diagramas, los scripts y los running-configs se encuentran organizados dentro de `laboratorio/`.
