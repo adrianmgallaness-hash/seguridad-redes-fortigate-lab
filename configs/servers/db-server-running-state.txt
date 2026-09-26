@@ -1,0 +1,36 @@
+DB SERVER - RUNNING STATE / CONFIGURACION VALIDADA
+Laboratorio de Seguridad de Redes con FortiGate
+
+Sistema
+- Rol: DB Server
+- Plataforma: Ubuntu Server
+- VLAN: VLAN 30 - DB
+- Red: 10.21.39.144/28
+- Direccion IP: 10.21.39.146/28
+- Gateway: 10.21.39.145
+
+Servicio
+- Motor de base de datos: MySQL
+- Puerto TCP: 3306
+- Estado validado: LISTEN
+- IP/puerto observado: 10.21.39.146:3306
+
+Comandos utilizados para validar el estado
+hostname -I
+ip route
+sudo ss -lntp | grep 3306
+
+Resultado funcional validado
+- WEB Server (10.21.39.130) -> DB Server (10.21.39.146) TCP/3306: PERMITIDO
+- WEB Server (10.21.39.130) -> DB Server (10.21.39.146) TCP/22: BLOQUEADO / TIMEOUT
+- USERS (10.21.39.11) -> DB Server (10.21.39.146) TCP/3306: BLOQUEADO / TIMEOUT
+
+Politicas asociadas en FortiGate
+- WEB -> DB MySQL TCP/3306: ALLOW
+- USERS -> DB MySQL TCP/3306: DENY
+- Otros servicios WEB -> DB: bloqueados por deny implicito
+
+Nota
+Este archivo documenta el estado de ejecucion y los parametros del DB Server que fueron
+verificados durante el laboratorio. No sustituye un backup nativo del sistema operativo ni
+incluye contenido no observado de archivos como /etc/netplan/* o mysqld.cnf.
