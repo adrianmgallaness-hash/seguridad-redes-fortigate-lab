@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="420" viewBox="0 0 1000 420">
+<style>
+text{font-family:Arial,sans-serif;fill:#111}.title{font-size:26px;font-weight:700}.box{fill:#f7f7f7;stroke:#333;stroke-width:2}.vpn{stroke:#1f6feb;stroke-width:4;stroke-dasharray:10 8;fill:none}.link{stroke:#333;stroke-width:3}.label{font-size:16px;font-weight:600}.small{font-size:13px}
+</style>
+<text x="30" y="38" class="title">Infraestructura 2 — VPN Site-to-Site</text>
+<rect x="60" y="145" width="170" height="90" rx="12" class="box"/><text x="145" y="180" text-anchor="middle" class="label">Ubuntu Client</text><text x="145" y="205" text-anchor="middle" class="small">10.21.39.0/25</text>
+<rect x="300" y="130" width="170" height="120" rx="12" class="box"/><text x="385" y="165" text-anchor="middle" class="label">FortiGate</text><text x="385" y="190" text-anchor="middle" class="small">WAN 198.51.100.22</text><text x="385" y="215" text-anchor="middle" class="small">GW USERS 10.21.39.1</text>
+<rect x="540" y="145" width="150" height="90" rx="45" class="box"/><text x="615" y="180" text-anchor="middle" class="label">ISP</text><text x="615" y="205" text-anchor="middle" class="small">IP públicas</text>
+<rect x="760" y="130" width="170" height="120" rx="12" class="box"/><text x="845" y="165" text-anchor="middle" class="label">Cisco R2</text><text x="845" y="190" text-anchor="middle" class="small">WAN 203.0.113.38</text><text x="845" y="215" text-anchor="middle" class="small">LAN 10.21.39.129/28</text>
+<rect x="760" y="310" width="170" height="75" rx="12" class="box"/><text x="845" y="340" text-anchor="middle" class="label">Ubuntu Server</text><text x="845" y="363" text-anchor="middle" class="small">10.21.39.130/28</text>
+<line x1="230" y1="190" x2="300" y2="190" class="link"/><line x1="470" y1="190" x2="540" y2="190" class="link"/><line x1="690" y1="190" x2="760" y2="190" class="link"/><line x1="845" y1="250" x2="845" y2="310" class="link"/>
+<path d="M385 270 C500 360 720 360 845 270" class="vpn"/><text x="615" y="350" text-anchor="middle" class="label" fill="#1f6feb">IPsec Site-to-Site</text>
+</svg>
