@@ -1,0 +1,30 @@
+! Infraestructura 3 - Cisco R2
+! Extracto verificado.
+
+interface FastEthernet0/0
+ description WAN-HACIA-ISP
+ ip address 203.0.113.38 255.255.255.252
+ ip nat outside
+ duplex full
+ no shutdown
+!
+interface FastEthernet1/0
+ no ip address
+ ip nat inside
+ no shutdown
+!
+interface FastEthernet1/0.10
+ encapsulation dot1Q 10
+ ip address 10.21.39.1 255.255.255.128
+ ip nat inside
+!
+ip route 0.0.0.0 0.0.0.0 203.0.113.37
+!
+ip dhcp excluded-address 10.21.39.1 10.21.39.9
+ip dhcp pool USERS
+ network 10.21.39.0 255.255.255.128
+ default-router 10.21.39.1
+ dns-server 8.8.8.8
+!
+access-list 100 permit ip 10.21.39.0 0.0.0.127 any
+ip nat inside source list 100 interface FastEthernet0/0 overload
