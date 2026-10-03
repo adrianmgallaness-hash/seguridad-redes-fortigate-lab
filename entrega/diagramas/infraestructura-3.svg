@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="470" viewBox="0 0 1000 470">
+<style>
+text{font-family:Arial,sans-serif;fill:#111}.title{font-size:26px;font-weight:700}.box{fill:#f7f7f7;stroke:#333;stroke-width:2}.vpn{stroke:#1f6feb;stroke-width:4;stroke-dasharray:10 8;fill:none}.https{stroke:#2da44e;stroke-width:4;fill:none}.link{stroke:#333;stroke-width:3}.label{font-size:16px;font-weight:600}.small{font-size:13px}
+</style>
+<text x="30" y="38" class="title">Infraestructura 3 — HTTPS público + SSH por VPN</text>
+<rect x="55" y="145" width="170" height="90" rx="12" class="box"/><text x="140" y="178" text-anchor="middle" class="label">Ubuntu Client</text><text x="140" y="204" text-anchor="middle" class="small">10.21.39.10/25</text>
+<rect x="280" y="145" width="150" height="90" rx="12" class="box"/><text x="355" y="178" text-anchor="middle" class="label">Cisco R2</text><text x="355" y="204" text-anchor="middle" class="small">VLAN 10 / DHCP / NAT</text>
+<rect x="500" y="145" width="140" height="90" rx="45" class="box"/><text x="570" y="178" text-anchor="middle" class="label">ISP</text><text x="570" y="204" text-anchor="middle" class="small">IP públicas</text>
+<rect x="710" y="130" width="180" height="120" rx="12" class="box"/><text x="800" y="165" text-anchor="middle" class="label">FortiGate</text><text x="800" y="190" text-anchor="middle" class="small">198.51.100.22</text><text x="800" y="215" text-anchor="middle" class="small">10.21.39.129/28</text>
+<rect x="710" y="335" width="180" height="85" rx="12" class="box"/><text x="800" y="368" text-anchor="middle" class="label">Ubuntu Server</text><text x="800" y="393" text-anchor="middle" class="small">10.21.39.130/28</text>
+<line x1="225" y1="190" x2="280" y2="190" class="link"/><line x1="430" y1="190" x2="500" y2="190" class="link"/><line x1="640" y1="190" x2="710" y2="190" class="link"/><line x1="800" y1="250" x2="800" y2="335" class="link"/>
+<path d="M140 120 C300 65 640 65 800 115" class="https"/><text x="470" y="82" text-anchor="middle" class="label" fill="#2da44e">HTTPS 443 sin VPN</text>
+<path d="M140 270 C300 440 600 440 800 275" class="vpn"/><text x="470" y="432" text-anchor="middle" class="label" fill="#1f6feb">VPN Remote Access → SSH 22</text>
+</svg>
