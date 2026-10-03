@@ -1,0 +1,41 @@
+! Infraestructura 2 - Cisco R2
+! Extracto verificado durante el laboratorio. No contiene secretos.
+
+interface FastEthernet0/0
+ description WAN-HACIA-ISP
+ ip address 203.0.113.38 255.255.255.252
+ ip nat outside
+ duplex full
+ crypto map FGT-VPN
+!
+interface FastEthernet1/0
+ ip address 10.21.39.129 255.255.255.240
+ ip nat inside
+ no shutdown
+!
+ip route 0.0.0.0 0.0.0.0 203.0.113.37
+!
+access-list 100 deny ip 10.21.39.128 0.0.0.15 10.21.39.0 0.0.0.127
+access-list 100 permit ip 10.21.39.128 0.0.0.15 any
+ip nat inside source list 100 interface FastEthernet0/0 overload
+!
+crypto isakmp policy 10
+ encr des
+ hash sha
+ authentication pre-share
+ group 5
+ lifetime 86400
+!
+! PSK OMITIDA
+!
+crypto ipsec transform-set FGT-SET esp-des esp-sha-hmac
+ mode tunnel
+!
+access-list 110 permit ip 10.21.39.128 0.0.0.15 10.21.39.0 0.0.0.127
+!
+crypto map FGT-VPN 10 ipsec-isakmp
+ set peer 198.51.100.22
+ set transform-set FGT-SET
+ set pfs group5
+ set security-association lifetime seconds 43200
+ match address 110
